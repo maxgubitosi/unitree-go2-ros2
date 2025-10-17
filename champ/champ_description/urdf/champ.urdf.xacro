@@ -15,7 +15,7 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="file://$(find champ_description)/meshes/base_simple.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://champ_description/meshes/base_simple.stl" scale="0.001 0.001 0.001" />
             </geometry>
             <material name="black" />
         </visual>
@@ -75,9 +75,12 @@
     </plugin>
     </gazebo>
 
+    <!-- Comentado porque go2_description ya tiene su propio plugin gazebo_ros2_control -->
+    <!--
     <gazebo>
         <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
         <parameters>$(find champ_gazebo)/config/ros_control.yaml</parameters>
       </plugin>
     </gazebo>
+    -->
 </robot>

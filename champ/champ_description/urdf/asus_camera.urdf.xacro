@@ -23,7 +23,7 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="file://$(find champ_description)/meshes/asus_camera_simple.dae"/>
+            <mesh filename="package://champ_description/meshes/asus_camera_simple.dae"/>
           </geometry>
         </visual>
        <!--        
@@ -37,7 +37,7 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="file://$(find champ_description)/meshes/asus_camera_simple.dae"/>
+            <mesh filename="package://champ_description/meshes/asus_camera_simple.dae"/>
           </geometry>
         </collision>
 

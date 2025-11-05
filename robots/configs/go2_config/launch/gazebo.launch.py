@@ -29,7 +29,7 @@ def generate_launch_description():
     ).find("go2_description")
     joints_config = os.path.join(config_pkg_share, "config/joints/joints.yaml")
     ros_control_config = os.path.join(
-        config_pkg_share, "/config/ros_control/ros_control.yaml"
+        config_pkg_share, "config/ros_control/ros_control.yaml"
     )
     gait_config = os.path.join(config_pkg_share, "config/gait/gait.yaml")
     links_config = os.path.join(config_pkg_share, "config/links/links.yaml")
@@ -42,13 +42,13 @@ def generate_launch_description():
         description="Use simulation (Gazebo) clock if true",
     )
     declare_rviz = DeclareLaunchArgument(
-        "rviz", default_value="false", description="Launch rviz"
+        "rviz", default_value="False", description="Launch rviz"
     )
     declare_robot_name = DeclareLaunchArgument(
         "robot_name", default_value="go2", description="Robot name"
     )
     declare_lite = DeclareLaunchArgument(
-        "lite", default_value="false", description="Lite"
+        "lite", default_value="False", description="Lite"
     )
     declare_ros_control_file = DeclareLaunchArgument(
         "ros_control_file",
@@ -60,7 +60,9 @@ def generate_launch_description():
     )
 
     declare_gui = DeclareLaunchArgument(
-        "gui", default_value="true", description="Use gui"
+        'gui',
+        default_value='True',
+        description='Set to "1" to run gazebo GUI.'
     )
     declare_world_init_x = DeclareLaunchArgument("world_init_x", default_value="0.0")
     declare_world_init_y = DeclareLaunchArgument("world_init_y", default_value="0.0")
@@ -89,8 +91,8 @@ def generate_launch_description():
             "lite": LaunchConfiguration("lite"),
             "rviz": LaunchConfiguration("rviz"),
             "joint_controller_topic": "joint_group_effort_controller/joint_trajectory",
-            "hardware_connected": "false",
-            "publish_foot_contacts": "false",
+            "hardware_connected": "False",
+            "publish_foot_contacts": "False",
             "close_loop_odom": "true",
         }.items(),
     )
@@ -113,6 +115,7 @@ def generate_launch_description():
             "world_init_z": LaunchConfiguration("world_init_z"),
             "world_init_heading": LaunchConfiguration("world_init_heading"),
             "gui": LaunchConfiguration("gui"),
+            "headless": "False",
             "close_loop_odom": "true",
         }.items(),
     )

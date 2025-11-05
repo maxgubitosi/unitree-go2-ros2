@@ -87,6 +87,10 @@ def generate_launch_description():
         cmd=["gzclient"],
         cwd=[launch_dir],
         output="screen",
+        additional_env={
+            'LIBGL_ALWAYS_SOFTWARE': '1',
+            'SVGA_VGPU10': '0'
+        }
     )
     start_gazebo_spawner_cmd = Node(
         package="gazebo_ros",

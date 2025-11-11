@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Platform macro -->
+    <xacro:macro name="platform" params="parent">
+        
+        <!-- Platform dimensions -->
+        <xacro:property name="platform_length" value="0.60"/>
+        <xacro:property name="platform_width" value="0.60"/>
+        <xacro:property name="platform_height" value="0.01"/>
+        <xacro:property name="platform_z_offset" value="0.08"/>
+        
+        <!-- Platform joint -->
+        <joint name="platform_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="platform_link"/>
+            <origin rpy="0 0 0" xyz="0 0 ${platform_z_offset}"/>
+        </joint>
+
+        <!-- Platform link -->
+        <link name="platform_link">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${platform_height/2}"/>
+                <geometry>
+                    <box size="${platform_length} ${platform_width} ${platform_height}"/>
+                </geometry>
+                <material name="platform_gray">
+                    <color rgba="0.5 0.5 0.5 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${platform_height/2}"/>
+                <geometry>
+                    <box size="${platform_length} ${platform_width} ${platform_height}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <origin rpy="0 0 0" xyz="0 0 ${platform_height/2}"/>
+                <mass value="0.01"/>
+                <inertia
+                    ixx="0.00008" ixy="0.0" ixz="0.0"
+                    iyy="0.00014" iyz="0.0"
+                    izz="0.00021"/>
+            </inertial>
+        </link>
+
+    </xacro:macro>
+
+</robot>

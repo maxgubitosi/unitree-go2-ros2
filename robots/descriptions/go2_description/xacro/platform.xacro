@@ -10,7 +10,7 @@
         <xacro:property name="platform_z_offset" value="0.08"/>
         
         <xacro:property name="aruco_total_size" value="0.50"/>
-        <xacro:property name="aruco_cell_size" value="${aruco_total_size / 6}"/>
+        <xacro:property name="aruco_cell_size" value="${aruco_total_size / 8}"/>
         <xacro:property name="aruco_cell_height" value="0.001"/>
         <xacro:property name="aruco_z_offset" value="${platform_height + aruco_cell_height/2}"/>
         
@@ -81,40 +81,68 @@
             <origin rpy="0 0 0" xyz="0 0 ${aruco_cell_height/2}"/>
         </joint>
         
+        <!-- ArUco 8x8 marker with full black border (ID 0 from DICT_6X6_250) -->
         <link name="aruco_pattern_link">
-            <visual><origin xyz="${-2.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${-1.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${-0.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${0.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${1.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${2.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <!-- Row 0 (top) - Full black border -->
+            <visual><origin xyz="${-3.5*aruco_cell_size} ${3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-2.5*aruco_cell_size} ${3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-1.5*aruco_cell_size} ${3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-0.5*aruco_cell_size} ${3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${0.5*aruco_cell_size} ${3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${1.5*aruco_cell_size} ${3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${2.5*aruco_cell_size} ${3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${3.5*aruco_cell_size} ${3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
             
-            <visual><origin xyz="${-2.5*aruco_cell_size} ${1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${-0.5*aruco_cell_size} ${1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${0.5*aruco_cell_size} ${1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${2.5*aruco_cell_size} ${1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <!-- Row 1 - Black borders + pattern (1 0 0 1 1 0) -->
+            <visual><origin xyz="${-3.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-2.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${0.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${1.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${3.5*aruco_cell_size} ${2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
             
-            <visual><origin xyz="${-2.5*aruco_cell_size} ${0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${-1.5*aruco_cell_size} ${0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${1.5*aruco_cell_size} ${0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${2.5*aruco_cell_size} ${0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <!-- Row 2 - Black borders + pattern (0 1 0 0 1 0) -->
+            <visual><origin xyz="${-3.5*aruco_cell_size} ${1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-1.5*aruco_cell_size} ${1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${1.5*aruco_cell_size} ${1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${3.5*aruco_cell_size} ${1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
             
-            <visual><origin xyz="${-2.5*aruco_cell_size} ${-0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${0.5*aruco_cell_size} ${-0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${2.5*aruco_cell_size} ${-0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <!-- Row 3 - Black borders + pattern (0 0 0 1 0 1) -->
+            <visual><origin xyz="${-3.5*aruco_cell_size} ${0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${0.5*aruco_cell_size} ${0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${2.5*aruco_cell_size} ${0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${3.5*aruco_cell_size} ${0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
             
-            <visual><origin xyz="${-2.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${-1.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${0.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${1.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${2.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <!-- Row 4 - Black borders + pattern (1 0 1 1 0 0) -->
+            <visual><origin xyz="${-3.5*aruco_cell_size} ${-0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-2.5*aruco_cell_size} ${-0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-0.5*aruco_cell_size} ${-0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${0.5*aruco_cell_size} ${-0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${3.5*aruco_cell_size} ${-0.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
             
-            <visual><origin xyz="${-2.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${-1.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${-0.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${0.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${1.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
-            <visual><origin xyz="${2.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size*0.99} ${aruco_cell_size*0.99} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <!-- Row 5 - Black borders + pattern (1 0 1 0 1 1) -->
+            <visual><origin xyz="${-3.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-2.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-0.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${1.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${2.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${3.5*aruco_cell_size} ${-1.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            
+            <!-- Row 6 - Black borders + pattern (0 1 1 0 0 1) -->
+            <visual><origin xyz="${-3.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-1.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-0.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${2.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${3.5*aruco_cell_size} ${-2.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            
+            <!-- Row 7 (bottom) - Full black border -->
+            <visual><origin xyz="${-3.5*aruco_cell_size} ${-3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-2.5*aruco_cell_size} ${-3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-1.5*aruco_cell_size} ${-3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${-0.5*aruco_cell_size} ${-3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${0.5*aruco_cell_size} ${-3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${1.5*aruco_cell_size} ${-3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${2.5*aruco_cell_size} ${-3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
+            <visual><origin xyz="${3.5*aruco_cell_size} ${-3.5*aruco_cell_size} 0"/><geometry><box size="${aruco_cell_size} ${aruco_cell_size} ${aruco_cell_height}"/></geometry><material name="black"><color rgba="0 0 0 1"/></material></visual>
         </link>
         <gazebo reference="aruco_pattern_link">
             <material>Gazebo/Black</material>
